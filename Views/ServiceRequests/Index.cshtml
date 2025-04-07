@@ -1,0 +1,46 @@
+@model IEnumerable<MunicipalityManagementSystem.Models.ServiceRequest>
+
+@{
+    ViewData["Title"] = "Service Requests";
+}
+
+<h1>Service Requests</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CitizenID)</th>
+            <th>@Html.DisplayNameFor(model => model.ServiceType)</th>
+            <th>@Html.DisplayNameFor(model => model.RequestDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th class="text-center" style="width: 150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CitizenID)</td>
+                <td>@Html.DisplayFor(modelItem => item.ServiceType)</td>
+                <td>@Html.DisplayFor(modelItem => item.RequestDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.RequestID" class="btn btn-warning btn-sm">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RequestID" class="btn btn-info btn-sm">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RequestID" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
